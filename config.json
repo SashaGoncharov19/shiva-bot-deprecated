@@ -3,5 +3,7 @@
 	"token": "OTgwOTMyNDAxMzczMDIwMTcx.G6TGVI.lFV1sDzT5ThqVQsbCcLj8keLXJCyPtg5yP8-iQ",
 	"owner": "314095628798001153",
 	"client_id": "980932401373020171",
-	"test_guild_id": "980763521191125044"
+	"test_guild_id": "980763521191125044",
+	"newbie_channel_id": "981147064320806912",
+	"newbie_role_id": "981191688536096778"
 }
