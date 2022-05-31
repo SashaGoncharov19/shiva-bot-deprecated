@@ -6,7 +6,7 @@ const { token, client_id, test_guild_id } = require("./config.json");
 
 const client = new Client({
 	// Please add all intents you need, more detailed information @ https://ziad87.net/intents/
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
 });
 
 const eventFiles = fs
@@ -18,6 +18,7 @@ for (const file of eventFiles) {
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client));
 	} else {
+		console.log(event.name)
 		client.on(
 			event.name,
 			async (...args) => await event.execute(...args, client)
