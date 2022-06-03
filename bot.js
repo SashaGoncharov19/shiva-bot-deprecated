@@ -2,11 +2,14 @@ const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
+const {Player} = require('discord-player')
 const { token, client_id, test_guild_id } = require("./config.json");
+const {DisTube} = require('distube');
+const { SpotifyPlugin } = require('@distube/spotify')
 
 const client = new Client({
 	// Please add all intents you need, more detailed information @ https://ziad87.net/intents/
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES],
 });
 
 const eventFiles = fs
@@ -37,6 +40,18 @@ client.contextCommands = new Collection();
 client.modalCommands = new Collection();
 client.cooldowns = new Collection();
 client.triggers = new Collection();
+client.player = new Player(client, {
+	ytdlOptions: {
+		quality: "highestaudio",
+		highWaterMark: 1 << 25
+	}
+});
+client.distube = new DisTube(client, {
+	emitNewSongOnly: true,
+	leaveOnFinish: true,
+	emitAddSongWhenCreatingQueue: false,
+	plugins: [new SpotifyPlugin()]
+})
 
 /**********************************************************************/
 // Registration of Message-Based Legacy Commands.

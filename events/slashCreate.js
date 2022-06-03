@@ -34,7 +34,7 @@ module.exports = {
 		// A try to executes the interaction.
 
 		try {
-			await command.execute(interaction);
+			await command.execute(interaction, client);
 		} catch (err) {
 			console.error(err);
 			await interaction.reply({

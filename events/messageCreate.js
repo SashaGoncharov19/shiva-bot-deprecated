@@ -166,7 +166,7 @@ module.exports = {
 
 		// execute the final command. Put everything above this.
 		try {
-			command.execute(message, args);
+			command.execute(message, args, client);
 		} catch (error) {
 			console.error(error);
 			message.reply({
