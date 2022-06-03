@@ -46,6 +46,7 @@ client.player = new Player(client, {
 		highWaterMark: 1 << 25
 	}
 });
+client.filters = {};
 client.distube = new DisTube(client, {
 	emitNewSongOnly: true,
 	leaveOnFinish: true,
