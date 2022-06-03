@@ -20,10 +20,17 @@ module.exports = {
 
 		const currentSong = queue.current;
 
-		interaction.reply({embeds: [
-				new MessageEmbed()
-					.setDescription(`Зараз грає [${currentSong.title}](${currentSong.url})\n\n` + bar + '')
-					.setThumbnail(currentSong.thumbnail)
-			]})
+		let songList = `Зараз грає [${currentSong.title}](${currentSong.url})\n\n` + bar + '\n\n';
+
+		queue.tracks.map((item, index) => {
+			return songList = songList + `${index}. ${item.title} | ${item.duration}\n`
+		})
+
+		const embed = new MessageEmbed()
+			.setThumbnail(currentSong.thumbnail)
+			.setDescription(songList)
+			.setTitle('Інформаційна панель музикального бота.')
+
+		interaction.reply({embeds: [embed]})
 	},
 };

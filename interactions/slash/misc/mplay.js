@@ -44,9 +44,5 @@ module.exports = {
 			interaction.reply({ embeds: [embed] })
 
 		if (!queue.playing) await queue.play()
-
-		client.player.on('trackStart', (_, track) => {
-			interaction.channel.send(`🎶 | Зараз грає **${track.title}**!`)
-		})
 	},
 };

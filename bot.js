@@ -243,6 +243,11 @@ for (const folder of triggerFolders) {
 	}
 }
 
+client.player.on('trackStart', (queue, track) => {
+	const channel = queue.guild.channels.cache.find(channel => channel.id === '981147064320806912')
+	channel.send(`🎶 | Зараз грає **${track.title}**!`)
+})
+
 // Login into your client application with bot's token.
 
 client.login(token);
