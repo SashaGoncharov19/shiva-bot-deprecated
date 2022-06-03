@@ -17,7 +17,6 @@ module.exports = {
 
 		const url = options.getString('url')
 
-
 		if (!interaction.member.voice.channel)
 			return interaction.reply('Приєднайся до голосового чату!')
 
