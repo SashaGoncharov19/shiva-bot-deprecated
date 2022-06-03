@@ -38,14 +38,14 @@ module.exports = {
 			let helpEmbed = new MessageEmbed()
 				.setColor(0x4286f4)
 				.setURL(process.env.URL)
-				.setTitle("List of all my commands")
+				.setTitle("Лист всіх комманд.")
 				.setDescription(
 					"`" + commands.map((command) => command.name).join("`, `") + "`"
 				)
 
 				.addField(
-					"Usage",
-					`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`
+					"Використовування",
+					`\nВи можете відправити \`${prefix}help [назву команди]\` щоб отримати інформацію про неї!`
 				);
 
 			// Attempts to send embed in DMs.
@@ -59,18 +59,18 @@ module.exports = {
 					// On validation, reply back.
 
 					message.reply({
-						content: "I've sent you a DM with all my commands!",
+						content: "Я відправив тобі список усіх команд в особисті повідомлення.",
 					});
 				})
 				.catch((error) => {
 					// On failing, throw error.
 
 					console.error(
-						`Could not send help DM to ${message.author.tag}.\n`,
+						`Не можу відправити допомогу в особисті повідомлення ${message.author.tag}.\n`,
 						error
 					);
 
-					message.reply({ content: "It seems like I can't DM you!" });
+					message.reply({ content: "Здається я не можу відправити тобі особисті повідомлення." });
 				});
 		}
 
@@ -95,7 +95,7 @@ module.exports = {
 		// If it's an invalid command.
 
 		if (!command) {
-			return message.reply({ content: "That's not a valid command!" });
+			return message.reply({ content: "Такої команди не існує.." });
 		}
 
 		/**
@@ -105,18 +105,18 @@ module.exports = {
 
 		let commandEmbed = new MessageEmbed()
 			.setColor(0x4286f4)
-			.setTitle("Command Help");
+			.setTitle("Помічник");
 
 		if (command.description)
 			commandEmbed.setDescription(`${command.description}`);
 
 		if (command.aliases)
 			commandEmbed
-				.addField("Aliases", `\`${command.aliases.join(", ")}\``, true)
-				.addField("Cooldown", `${command.cooldown || 3} second(s)`, true);
+				.addField("Псевдоніми", `\`${command.aliases.join(", ")}\``, true)
+				.addField("Затримка", `${command.cooldown || 3} секунд(и)`, true);
 		if (command.usage)
 			commandEmbed.addField(
-				"Usage",
+				"Використовування",
 				`\`${prefix}${command.name} ${command.usage}\``,
 				true
 			);
