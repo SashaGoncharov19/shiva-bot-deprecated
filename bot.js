@@ -1,11 +1,12 @@
-const fs = require("fs");
-const { Client, Collection, Intents } = require("discord.js");
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
-const {Player} = require('discord-player')
-const { token, client_id, test_guild_id } = require("./config.json");
-const {DisTube} = require('distube');
+const fs = require('fs');
+const { Client, Collection, Intents } = require('discord.js');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const { Player } = require('discord-player')
+const { DisTube } = require('distube');
 const { SpotifyPlugin } = require('@distube/spotify')
+
+const { token, client_id, test_guild_id } = require('./config.json');
 
 const client = new Client({
 	// Please add all intents you need, more detailed information @ https://ziad87.net/intents/

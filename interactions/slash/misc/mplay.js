@@ -15,34 +15,37 @@ module.exports = {
 	async execute(interaction, client) {
 		const options = interaction.options;
 
-		const url = options.getString('url')
+		const url = options.getString('url');
 
 		if (!interaction.member.voice.channel)
-			return interaction.reply('Приєднайся до голосового чату!')
+			return interaction.reply('Приєднайся до голосового чату!');
 
 		const result = await client.player.search(url, {
 			requestedBy: interaction.user,
 			searchEngine: QueryType.AUTO
-		})
+		});
+
+		if (result.tracks.length === 0) return interaction.reply('Не знайдено такого треку чи плейлисту.');
 
 		const queue = client.player.createQueue(interaction.guild);
+
 		if (!queue.connection)
-			await queue.connect(interaction.member.voice.channel)
+			await queue.connect(interaction.member.voice.channel);
 
 		const isPlayList = !!result.playlist;
 
 		isPlayList ? queue.addTracks(result.tracks) : queue.addTrack(result.tracks[0]);
-		const songList = isPlayList ? result.playlist : result.tracks[0]
+		const songList = isPlayList ? result.playlist : result.tracks[0];
 
 			const msgEmbed = isPlayList ? `**${result.tracks.length} пісень | [${songList.title}](${songList.url})** плейлист добавлений в чергу.`
-				: `**[${songList.title}](${songList.url})** добавлено в чергу.`
+				: `**[${songList.title}](${songList.url})** добавлено в чергу.`;
 
 			const embed = new MessageEmbed()
 				.setDescription(msgEmbed)
-				.setThumbnail(songList.thumbnail)
+				.setThumbnail(songList.thumbnail);
 
-			interaction.reply({ embeds: [embed] })
+			interaction.reply({ embeds: [embed] });
 
-		if (!queue.playing) await queue.play()
+		if (!queue.playing) await queue.play();
 	},
 };
